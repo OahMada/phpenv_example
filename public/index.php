@@ -3,9 +3,13 @@
 require_once '../vendor/autoload.php';
 
 
+$file = '../storage/database.db'; 
+if (is_writable('../storage/database.local.db')) {
+    $file = '../storage/database.local.db'; 
+} 
 $database = new medoo([ 
     'database_type' => 'sqlite', 
-    'database_file' => '../storage/database.db' 
+    'database_file' => $file 
 ]);
 
 $comment = new SitePoint\Comment($database); 
@@ -14,6 +18,8 @@ $comment->setEmail('bruno@skvorc.me')
         //->setComment('It works!') 
         ->setComment('Hooray! Saving comments works!') 
         ->save();
+
+//echo $comment->name;
 
 dump($database->error());
 ?>
@@ -40,7 +46,7 @@ dump($database->error());
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <form method=""post">    
+        <form method="post">    
             <label>Name: <input type="text" name="name" placeholder="Your name"></label>
 
             <label>Email: <input type="text" name="email" placeholder="your@email.com"></label>
