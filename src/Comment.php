@@ -20,7 +20,7 @@ class Comment
     {
         $collection = [];
         $comments = $this->database->select('comments', '*',
-                ["ORDER" => "comment.submissionDate DESC"]);
+                ["ORDER" => "comments.submissionDate DESC"]);
         if($comments) {
             foreach ($comments as $array) {
                 $comment = new self($this->database);
